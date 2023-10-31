@@ -28,11 +28,7 @@ def bcv():
             "paralelo": 0,
             "bcv": 0
         },
-        "petro": {
-            "currency": "VES/BS",
-            "compra": 0,
-            "venta": 0
-        }
+     
     }
 
     soup = BeautifulSoup(response.content, 'html5lib')
@@ -43,12 +39,6 @@ def bcv():
     for i, el in enumerate(els):
         if i == 0 or i == len(els):
             continue
-
-        if i == 1:
-            hashMap["petro"]['compra'] = el.text.split()[1]
-
-        if i == 2:
-            hashMap["petro"]['venta'] = el.text.split()[1]
 
         if i == 3:
             hashMap["dollar"]['bcv'] = el.text.split()[1]
