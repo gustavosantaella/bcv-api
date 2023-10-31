@@ -8,11 +8,14 @@ router = APIRouter(
 
 @router.get("")
 def get(tasa: str = 'bcv'):
-    data, error = BcvService.values()
-    if error:
+    try:
+        data, error = BcvService.values()
+        if error:
+            return static_response_error()
+        
+        return {
+            "status":200,
+            "data": data
+        } 
+    except Exception as e:
         return static_response_error()
-    
-    return {
-        "status":200,
-        "data": data
-    } 
