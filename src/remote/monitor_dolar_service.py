@@ -47,9 +47,11 @@ class MonitorDolarService:
             
             if need_update == True and data[1] != paralelo:
                 print("price has been updated")
-                sqllite.con.cursor().execute("UPDATE dollar_values SET value = ? WHERE page_name = ?", [paralelo, MonitorDolarService.page_name])
+                cur = sqllite.con.cursor().execute("UPDATE dollar_values SET value = ? WHERE page_name = ?", [paralelo, MonitorDolarService.page_name])
+                cur.close()
             else:
-                sqllite.con.cursor().execute("INSERT INTO dollar_values (value, page, page_name) VALUES (?, ?, ?)", [paralelo, response1.url, MonitorDolarService.page_name])
+                cur = sqllite.con.cursor().execute("INSERT INTO dollar_values (value, page, page_name) VALUES (?, ?, ?)", [paralelo, response1.url, MonitorDolarService.page_name])
+                cur.close()
             
             sqllite.con.commit()
         else:
