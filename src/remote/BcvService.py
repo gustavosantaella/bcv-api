@@ -8,7 +8,7 @@ class BcvService:
     @staticmethod
     def values():
         URL = getenv("URL")
-        response = requests.get(URL, timeout=100)
+        response = requests.get(URL, timeout=100, verify=False)
         if response.status_code != 200:
             return None, True
 
